@@ -15,9 +15,8 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  & + div {
-    margin-left: 35px;
-  }
+  margin: 14px 14px;
+  right: 17px;
 
   button {
     background: transparent;
