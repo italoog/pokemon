@@ -21,7 +21,6 @@ const Home: React.FC = () => (
 
       <ThemeButton />
     </Container>
-    <DetailsModal />
   </>
 );
 
