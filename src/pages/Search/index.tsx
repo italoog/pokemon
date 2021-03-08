@@ -1,25 +1,46 @@
-import React, { useState, FormEvent } from 'react';
-
+/* eslint-disable camelcase */
+import React, { useState, FormEvent, useContext } from 'react';
+import { PokemonContext } from '../../hooks/pokemonsContext';
 import ThemeButton from '../../components/ThemeButton';
 import HeaderMenu from '../../components/HeaderMenu';
-import Card from '../../components/Card';
-// import DetailsModal from '../../components/DetailsModal';
+// import Card from '../../components/Card';
+import DetailsModal from '../../components/DetailsModal';
 
 import search from '../../assets/search.svg';
+import heartRed from '../../assets/heartGrey.svg';
 
-import { Container, Content, ContentCards, InputSearch } from './styles';
-import api from '../../services/api';
+import { Container, Content, ContentCards, InputSearch, Card } from './styles';
+
+// interface PokemonType {
+//   slot: number;
+//   type: any;
+// }
+// interface Pokemon {
+//   id: number;
+//   name: string;
+//   weight: number;
+//   height: number;
+//   stats: [];
+//   types: PokemonType[];
+//   sprites: {
+//     back_default: string;
+//     front_default: string;
+//   };
+// }
 
 const Search: React.FC = () => {
+  const { buscar, pokemons } = useContext(PokemonContext);
+
   const [newPokemon, setNewPokemon] = useState('');
-  const [pokemos, setPokemos] = useState([]);
 
   async function handleAddPokemon(
     event: FormEvent<HTMLFontElement | any>,
   ): Promise<void> {
     event.preventDefault();
-    const response = await api.get(`pokemon/${newPokemon}`);
-    console.log(response.data);
+
+    if (newPokemon) {
+      buscar(newPokemon);
+    }
   }
 
   return (
@@ -41,7 +62,27 @@ const Search: React.FC = () => {
           </form>
 
           <ContentCards>
-            <Card />
+            {pokemons.map((item) => (
+              <Card key={item.id}>
+                <button type="button">
+                  <img src={heartRed} alt="" />
+                </button>
+
+                <img src={item.sprites.front_default} alt="" />
+
+                <div>
+                  <h1>{item.name}</h1>
+                  <span>ID: {item.id}</span>
+
+                  <div>
+                    {item.types.map((type) => (
+                      <div>{type.type.name}</div>
+                    ))}
+                  </div>
+                  <button type="button">Ver detalhes</button>
+                </div>
+              </Card>
+            ))}
           </ContentCards>
         </Content>
 
