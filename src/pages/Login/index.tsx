@@ -2,7 +2,10 @@ import React, { useCallback, useRef } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
+import { useHistory } from 'react-router-dom';
 import getValidationError from '../../utils/getValidationsErrors';
+
+import api from '../../services/api';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -19,6 +22,8 @@ interface LoginFormData {
 }
 
 const Login: React.FC = () => {
+  const history = useHistory();
+
   const formRef = useRef<FormHandles>(null);
 
   const { login } = useAuth();
@@ -43,13 +48,14 @@ const Login: React.FC = () => {
           email: data.email,
           password: data.password,
         });
+        history.push('/home');
       } catch (err) {
         const errors = getValidationError(err);
 
         formRef.current?.setErrors(errors);
       }
     },
-    [login],
+    [login, history],
   );
 
   return (
