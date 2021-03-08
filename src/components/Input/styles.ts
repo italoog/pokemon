@@ -7,12 +7,13 @@ export const Container = styled.input`
   padding: 16px;
   width: 100%;
   color: #1e1e1f;
+  margin-bottom: 15px;
 
   &::placeholder {
     color: #7d7e80;
   }
 
   & + input {
-    margin-top: 15px;
+    /* margin-top: 15px; */
   }
 `;
