@@ -3,30 +3,11 @@ import React, { useState, FormEvent, useContext } from 'react';
 import { PokemonContext } from '../../hooks/pokemonsContext';
 import ThemeButton from '../../components/ThemeButton';
 import HeaderMenu from '../../components/HeaderMenu';
-// import Card from '../../components/Card';
-import DetailsModal from '../../components/DetailsModal';
 
 import search from '../../assets/search.svg';
 import heartRed from '../../assets/heartGrey.svg';
 
 import { Container, Content, ContentCards, InputSearch, Card } from './styles';
-
-// interface PokemonType {
-//   slot: number;
-//   type: any;
-// }
-// interface Pokemon {
-//   id: number;
-//   name: string;
-//   weight: number;
-//   height: number;
-//   stats: [];
-//   types: PokemonType[];
-//   sprites: {
-//     back_default: string;
-//     front_default: string;
-//   };
-// }
 
 const Search: React.FC = () => {
   const { buscar, pokemons } = useContext(PokemonContext);

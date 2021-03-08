@@ -5,8 +5,6 @@ import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
 import getValidationError from '../../utils/getValidationsErrors';
 
-import api from '../../services/api';
-
 import logoImg from '../../assets/logo.svg';
 
 import ThemeButton from '../../components/ThemeButton';

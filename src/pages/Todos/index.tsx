@@ -3,6 +3,7 @@ import React from 'react';
 import ThemeButton from '../../components/ThemeButton';
 import HeaderMenu from '../../components/HeaderMenu';
 import Card from '../../components/Card';
+import DetailsModal from '../../components/DetailsModal';
 
 import { Container, Content, ContentCards, Filtro } from './styles';
 
@@ -31,6 +32,7 @@ const Todos: React.FC = () => (
       </Content>
       <ThemeButton />
     </Container>
+    <DetailsModal />
   </>
 );
 

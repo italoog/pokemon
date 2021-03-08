@@ -19,7 +19,7 @@ export const Container = styled.div`
   width: 378px;
   height: 639px;
   max-width: 400px;
-  border-radius: 5px;
+  border-radius: 8px;
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
   position: relative;
   justify-content: center;

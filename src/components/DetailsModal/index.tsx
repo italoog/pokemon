@@ -42,7 +42,7 @@ const DetailsModal: React.FC = () => (
           <StatisticalBar>
             <span>HP</span>
             <div>
-              <div style={{ width: `50%` }} />
+              <div style={{ width: `80%` }} />
             </div>
             <span>93</span>
           </StatisticalBar>
@@ -56,14 +56,14 @@ const DetailsModal: React.FC = () => (
           <StatisticalBar>
             <span>DEF</span>
             <div>
-              <div style={{ width: `50%` }} />
+              <div style={{ width: `59%` }} />
             </div>
             <span>93</span>
           </StatisticalBar>
           <StatisticalBar>
             <span>S.ATK</span>
             <div>
-              <div style={{ width: `50%` }} />
+              <div style={{ width: `30%` }} />
             </div>
             <span>93</span>
           </StatisticalBar>
