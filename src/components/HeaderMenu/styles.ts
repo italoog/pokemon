@@ -24,11 +24,25 @@ export const Nav = styled.nav`
 
     li {
       flex: 1;
-      margin: 0 13px;
+      margin: 0 5px;
       width: 100px;
+
+      a {
+        color: #000;
+        text-decoration: none;
+        padding-bottom: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+
+        &:hover {
+          font-weight: 600;
+          border-bottom: 2px solid #000000;
+        }
+      }
     }
   }
 `;
+
 export const ExitButton = styled.button`
   width: 89px;
   height: 28px;

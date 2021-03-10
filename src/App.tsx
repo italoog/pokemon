@@ -9,15 +9,13 @@ import { PokemonProvider } from './hooks/pokemonsContext';
 import Routes from './routes/index';
 
 const App: React.FC = () => (
-  <>
+  <Router>
     <AuthProvider>
       <PokemonProvider>
-        <Router>
-          <Routes />
-        </Router>
+        <Routes />
       </PokemonProvider>
     </AuthProvider>
     <GlobalStyle />
-  </>
+  </Router>
 );
 export default App;
