@@ -32,8 +32,8 @@ const Menu: React.FC = () => {
 
         <ExitButton
           onClick={() => {
-            logout();
             history.push('/');
+            logout();
           }}
         >
           <span>Sair</span> <img src={IconExit} alt="" />
