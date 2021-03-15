@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { createContext, useCallback, useContext, useState } from 'react';
 
 interface AuthState {
