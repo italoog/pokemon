@@ -1,14 +1,14 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+
+import Route from './Route'
 
 import Login from '../pages/Login';
 import Home from '../pages/Home';
 import Search from '../pages/Search';
 import Todos from '../pages/Todos';
-import { useAuth } from '../hooks/Auth';
 
 const Routes: React.FC = () => {
-  const { user } = useAuth();
 
   return (
     <Switch>
