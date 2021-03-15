@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import loginBackgroundImg from '../../assets/login-background.png';
 
 export const Container = styled.div`
+  margin-left: 50px;
   height: 100vh;
 
   display: flex;

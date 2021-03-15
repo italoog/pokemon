@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Header, HeaderContent, Nav, ExitButton } from './styles';
 
@@ -11,9 +12,15 @@ const Menu: React.FC = () => (
       <img src={LogoBWMenu} alt="Pokémon" />
       <Nav>
         <ul>
-          <li>Favoritos</li>
-          <li>Procurar</li>
-          <li>Ver todos</li>
+          <li>
+            <Link to="/home">Favoritos</Link>
+          </li>
+          <li>
+            <Link to="/search">Procurar</Link>
+          </li>
+          <li>
+            <Link to="/todos">Ver todos</Link>
+          </li>
         </ul>
       </Nav>
       <ExitButton>
