@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Header, HeaderContent, Nav, ExitButton } from './styles';
 
@@ -9,6 +9,7 @@ import LogoBWMenu from '../../assets/logoBW.svg';
 import IconExit from '../../assets/icon-exit.svg';
 
 const Menu: React.FC = () => {
+  const history = useHistory();
   const { logout } = useAuth();
 
   return (
@@ -29,7 +30,12 @@ const Menu: React.FC = () => {
           </ul>
         </Nav>
 
-        <ExitButton onClick={logout}>
+        <ExitButton
+          onClick={() => {
+            logout();
+            history.push('/');
+          }}
+        >
           <span>Sair</span> <img src={IconExit} alt="" />
         </ExitButton>
       </HeaderContent>
