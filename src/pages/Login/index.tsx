@@ -19,7 +19,6 @@ interface LoginFormData {
 }
 
 const Login: React.FC = () => {
-
   const formRef = useRef<FormHandles>(null);
 
   const { login } = useAuth();
