@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 
 interface AuthState {
-  email: any;
+  email: string;
 }
 
 interface SignInCredentials {
@@ -21,11 +21,10 @@ const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<any>(() => {
     const token = localStorage.getItem('@Pokemon:email');
 
-    if (token) {
-      return { token };
+    if (token !== null) {
+      return token;
     }
-
-    return {} as AuthState;
+    return null as any;
   });
 
   const login = useCallback(({ email }) => {
@@ -41,7 +40,7 @@ const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.email, login, logout }}>
+    <AuthContext.Provider value={{ user: data, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

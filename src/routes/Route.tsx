@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Route as ReactDOMRoute,
+  Router as ReactDOMRoute,
   RouterProps as ReactDOMRoutProps,
   Redirect,
 } from 'react-router-dom';
@@ -12,12 +12,22 @@ interface RouterProps extends ReactDOMRoutProps {
   component: React.ComponentType;
 }
 
+function logged(user: string | undefined): boolean {
+  return user !== undefined;
+}
+
 const Route: React.FC<RouterProps> = ({
   isPrivate = false,
   component: Component,
   ...rest
 }) => {
   const { user } = useAuth();
+
+  const isLogged = logged(user);
+
+  console.log(isPrivate);
+  console.log(isLogged);
+  console.log(user);
 
   return (
     <ReactDOMRoute
