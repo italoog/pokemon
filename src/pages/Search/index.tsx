@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-param-reassign */
 /* eslint-disable camelcase */
 import React, { useState, FormEvent, useContext } from 'react';
@@ -12,9 +13,7 @@ import heartGrey from '../../assets/heartGrey.svg';
 import { Container, Content, ContentCards, InputSearch, Card } from './styles';
 
 const Search: React.FC = () => {
-  const { buscar, pokemons, addfavorites, favorites } = useContext(
-    PokemonContext,
-  );
+  const { buscar, pokemons, addfavorites } = useContext(PokemonContext);
 
   const [newPokemon, setNewPokemon] = useState('');
 
@@ -26,7 +25,6 @@ const Search: React.FC = () => {
     if (newPokemon) {
       buscar(newPokemon);
     }
-    console.log(favorites);
   }
 
   function handleAddFavorites(item: any): void {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Header, HeaderContent, Nav, ExitButton } from './styles';
 
@@ -10,7 +10,6 @@ import IconExit from '../../assets/icon-exit.svg';
 
 const Menu: React.FC = () => {
   const { logout } = useAuth();
-  const history = useHistory();
 
   return (
     <Header>

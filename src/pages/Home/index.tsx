@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import ThemeButton from '../../components/ThemeButton';
 import HeaderMenu from '../../components/HeaderMenu';
@@ -9,9 +9,7 @@ import { PokemonContext } from '../../hooks/pokemonsContext';
 import EmptySpace from '../../components/EmptySpace';
 
 const Home: React.FC = () => {
-  const { addfavorites, favorites } = useContext(PokemonContext);
-
-  console.log(favorites);
+  const { favorites } = useContext(PokemonContext);
 
   return (
     <>
