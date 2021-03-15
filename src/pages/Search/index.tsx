@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable camelcase */
 import React, { useState, FormEvent, useContext } from 'react';
 import { PokemonContext } from '../../hooks/pokemonsContext';
@@ -5,12 +6,15 @@ import ThemeButton from '../../components/ThemeButton';
 import HeaderMenu from '../../components/HeaderMenu';
 
 import search from '../../assets/search.svg';
-import heartRed from '../../assets/heartGrey.svg';
+import heartRed from '../../assets/heartRed.svg';
+import heartGrey from '../../assets/heartGrey.svg';
 
 import { Container, Content, ContentCards, InputSearch, Card } from './styles';
 
 const Search: React.FC = () => {
-  const { buscar, pokemons } = useContext(PokemonContext);
+  const { buscar, pokemons, addfavorites, favorites } = useContext(
+    PokemonContext,
+  );
 
   const [newPokemon, setNewPokemon] = useState('');
 
@@ -22,6 +26,11 @@ const Search: React.FC = () => {
     if (newPokemon) {
       buscar(newPokemon);
     }
+    console.log(favorites);
+  }
+
+  function handleAddFavorites(item: any): void {
+    addfavorites(item);
   }
 
   return (
@@ -45,8 +54,18 @@ const Search: React.FC = () => {
           <ContentCards>
             {pokemons.map((item) => (
               <Card key={item.id}>
-                <button type="button">
-                  <img src={heartRed} alt="" />
+                <button
+                  onClick={() => {
+                    item.favorite = true;
+                    handleAddFavorites(item);
+                  }}
+                  type="button"
+                >
+                  {item.favorite === true ? (
+                    <img src={heartRed} alt="" />
+                  ) : (
+                    <img src={heartGrey} alt="" />
+                  )}
                 </button>
 
                 <img src={item.sprites.front_default} alt="" />

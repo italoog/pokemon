@@ -11,6 +11,7 @@ interface PokemonType {
 interface Pokemon {
   id: number;
   name: string;
+  favorite: boolean;
   weight: number;
   height: number;
   stats: [];
@@ -22,10 +23,11 @@ interface Pokemon {
 }
 
 interface PokemonContextData {
-  // pokemon: Pokemon;
   name: string;
   buscar(inputtext: string): Promise<void>;
   pokemons: Pokemon[];
+  favorites: Pokemon[];
+  addfavorites(inputtext: string): void;
 }
 
 export const PokemonContext = createContext<PokemonContextData>(
@@ -34,19 +36,38 @@ export const PokemonContext = createContext<PokemonContextData>(
 
 export const PokemonProvider: React.FC = ({ children }) => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [favorites, setFavorites] = useState<Pokemon[]>([]);
 
   const buscar = useCallback(
     async (inputText) => {
       const response = await api.get<Pokemon>(`pokemon/${inputText}`);
 
       const pokemon = response.data;
-      setPokemons([...pokemons, pokemon]);
+      const isRepeated = pokemons.find((item) => {
+        if (item.id === pokemon.id) {
+          return true;
+        }
+        return false;
+      });
+
+      if (!isRepeated) {
+        setPokemons([...pokemons, pokemon]);
+      }
     },
     [setPokemons, pokemons],
   );
 
+  const addfavorites = useCallback(
+    (item) => {
+      setFavorites([...favorites, item]);
+    },
+    [setFavorites, favorites],
+  );
+
   return (
-    <PokemonContext.Provider value={{ name: 'teste', buscar, pokemons }}>
+    <PokemonContext.Provider
+      value={{ name: 'teste', addfavorites, buscar, favorites, pokemons }}
+    >
       {children}
     </PokemonContext.Provider>
   );
