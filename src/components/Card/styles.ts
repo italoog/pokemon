@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div``;
+
+export const Cardpokemon = styled.div`
   position: relative;
   width: 165px;
   height: 236px;

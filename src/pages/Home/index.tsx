@@ -15,7 +15,7 @@ const Home: React.FC = () => {
     <>
       <Container>
         <HeaderMenu />
-        {favorites.length !== 0 ? (
+        {favorites.length === 0 ? (
           <Bookmarks>
             {favorites.length > 1 ? (
               <h1>Olá, você tem {favorites.length} pokémons salvos!</h1>
