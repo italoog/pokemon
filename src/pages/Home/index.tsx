@@ -15,7 +15,7 @@ const Home: React.FC = () => {
     <>
       <Container>
         <HeaderMenu />
-        {favorites.length === 0 ? (
+        {favorites.length !== 0 ? (
           <Bookmarks>
             {favorites.length > 1 ? (
               <h1>Olá, você tem {favorites.length} pokémons salvos!</h1>
@@ -23,7 +23,9 @@ const Home: React.FC = () => {
               <h1>Olá, você tem {favorites.length} pokémon salvo!</h1>
             )}
             <ContentCards>
-              <Card />
+              {favorites.map((item) => (
+                <Card key={item.id} pokemon={item} />
+              ))}
             </ContentCards>
           </Bookmarks>
         ) : (

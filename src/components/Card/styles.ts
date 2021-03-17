@@ -7,6 +7,7 @@ export const Cardpokemon = styled.div`
   width: 165px;
   height: 236px;
   padding-top: 10px;
+  padding-bottom: 20px;
 
   background: #ffffff;
   box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.05);
@@ -32,7 +33,7 @@ export const Cardpokemon = styled.div`
   }
 
   > img {
-    margin-bottom: 10px;
+    margin-top: 10px;
   }
 
   > div {

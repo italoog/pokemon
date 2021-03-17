@@ -2,7 +2,7 @@ import React from 'react';
 
 import ThemeButton from '../../components/ThemeButton';
 import HeaderMenu from '../../components/HeaderMenu';
-import Card from '../../components/Card';
+// import Card from '../../components/Card';
 // import DetailsModal from '../../components/DetailsModal';
 
 import { Container, Content, ContentCards, Filtro } from './styles';
@@ -19,6 +19,7 @@ const Todos: React.FC = () => (
           <button type="button">Water</button>
         </Filtro>
         <ContentCards>
+          {/* <Card />
           <Card />
           <Card />
           <Card />
@@ -26,8 +27,7 @@ const Todos: React.FC = () => (
           <Card />
           <Card />
           <Card />
-          <Card />
-          <Card />
+          <Card /> */}
         </ContentCards>
       </Content>
       <ThemeButton />

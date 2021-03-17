@@ -8,7 +8,7 @@ interface PokemonType {
   type: any;
 }
 
-interface Pokemon {
+export interface Pokemon {
   id: number;
   name: string;
   favorite: boolean;
