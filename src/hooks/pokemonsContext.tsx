@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable camelcase */
 import React, { createContext, useCallback, useState } from 'react';
@@ -23,11 +24,10 @@ export interface Pokemon {
 }
 
 interface PokemonContextData {
-  name: string;
   buscar(inputtext: string): Promise<void>;
   pokemons: Pokemon[];
   favorites: Pokemon[];
-  addfavorites(inputtext: string): void;
+  addfavorites(item: Pokemon): void;
 }
 
 export const PokemonContext = createContext<PokemonContextData>(
@@ -58,15 +58,29 @@ export const PokemonProvider: React.FC = ({ children }) => {
   );
 
   const addfavorites = useCallback(
-    (item) => {
-      setFavorites([...favorites, item]);
+    (pokemon: Pokemon) => {
+      const isRepeated = favorites.find((favoriteItem) => {
+        if (pokemon.id === favoriteItem.id) {
+          return true;
+        }
+        return false;
+      });
+      if (!isRepeated) {
+        pokemon.favorite = true;
+        setFavorites([...favorites, pokemon]);
+      } else {
+        const selectItem = favorites.findIndex(
+          (item) => item.id === pokemon.id,
+        );
+        favorites.splice(selectItem, 1);
+      }
     },
     [setFavorites, favorites],
   );
 
   return (
     <PokemonContext.Provider
-      value={{ name: 'teste', addfavorites, buscar, favorites, pokemons }}
+      value={{ addfavorites, buscar, favorites, pokemons }}
     >
       {children}
     </PokemonContext.Provider>

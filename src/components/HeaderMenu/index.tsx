@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { Header, HeaderContent, Nav, ExitButton } from './styles';
 
 import { useAuth } from '../../hooks/Auth';
+import { PokemonContext } from '../../hooks/pokemonsContext';
 
 import LogoBWMenu from '../../assets/logoBW.svg';
 import IconExit from '../../assets/icon-exit.svg';
 
 const Menu: React.FC = () => {
+  const { favorites } = useContext(PokemonContext);
   const history = useHistory();
   const { logout } = useAuth();
+
+  let pokemonCounter;
+
+  if (favorites.length > 0) {
+    pokemonCounter = favorites.length;
+  }
 
   return (
     <Header>
@@ -19,7 +27,10 @@ const Menu: React.FC = () => {
         <Nav>
           <ul>
             <li>
-              <Link to="/home">Favoritos</Link>
+              <Link to="/home">
+                Favoritos
+                {favorites.length > 0 ? <div>{pokemonCounter}</div> : <span />}
+              </Link>
             </li>
             <li>
               <Link to="/search">Procurar</Link>

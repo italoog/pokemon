@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable camelcase */
 import React, { useState, FormEvent, useContext } from 'react';
-import { PokemonContext } from '../../hooks/pokemonsContext';
+import { PokemonContext, Pokemon } from '../../hooks/pokemonsContext';
 import ThemeButton from '../../components/ThemeButton';
 import HeaderMenu from '../../components/HeaderMenu';
 
@@ -27,7 +27,7 @@ const Search: React.FC = () => {
     }
   }
 
-  function handleAddFavorites(item: any): void {
+  function handleAddFavorites(item: Pokemon): void {
     addfavorites(item);
   }
 
@@ -54,7 +54,6 @@ const Search: React.FC = () => {
               <Card key={item.id}>
                 <button
                   onClick={() => {
-                    item.favorite = true;
                     handleAddFavorites(item);
                   }}
                   type="button"

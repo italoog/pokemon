@@ -2,7 +2,8 @@ import { shade } from 'polished';
 import styled from 'styled-components';
 
 export const Header = styled.header`
-  padding: 10px 0;
+  /* padding-top: 15px; */
+  /* padding-bottom: 5px; */
   background: #ffcb05;
 `;
 
@@ -15,7 +16,8 @@ export const HeaderContent = styled.div`
 `;
 
 export const Nav = styled.nav`
-  max-width: 313px;
+  padding-top: 15px;
+  max-width: 413px;
 
   ul {
     display: flex;
@@ -25,18 +27,34 @@ export const Nav = styled.nav`
     li {
       flex: 1;
       margin: 0 5px;
-      width: 100px;
+      width: 120px;
 
       a {
+        display: flex;
+        justify-content: space-around;
         color: #000;
         text-decoration: none;
         padding-bottom: 15px;
         padding-left: 15px;
         padding-right: 15px;
+        border-bottom: 2px solid #ffcb05;
+        transition: font-weight, border-bottom 0.2s;
 
         &:hover {
           font-weight: 600;
           border-bottom: 2px solid #000000;
+        }
+
+        > div {
+          margin-left: 5px;
+          width: 17px;
+          height: 17px;
+          color: #fff;
+          font-weight: 600;
+          text-align: center;
+
+          background: #343232;
+          border-radius: 8.5px;
         }
       }
     }
