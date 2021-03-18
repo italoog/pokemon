@@ -29,7 +29,7 @@ const Menu: React.FC = () => {
             <li>
               <Link to="/home">
                 Favoritos
-                {favorites.length > 0 ? <div>{pokemonCounter}</div> : <span />}
+                {favorites.length > 0 && <div>{pokemonCounter}</div>}
               </Link>
             </li>
             <li>
