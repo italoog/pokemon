@@ -69,6 +69,7 @@ export const PokemonProvider: React.FC = ({ children }) => {
         pokemon.favorite = true;
         setFavorites([...favorites, pokemon]);
       } else {
+        pokemon.favorite = false;
         setFavorites(favorites.filter((elemet) => elemet.id !== pokemon.id));
       }
     },

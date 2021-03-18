@@ -2,18 +2,19 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable camelcase */
 import React, { useState, FormEvent, useContext } from 'react';
-import { PokemonContext, Pokemon } from '../../hooks/pokemonsContext';
+import { PokemonContext } from '../../hooks/pokemonsContext';
 import ThemeButton from '../../components/ThemeButton';
 import HeaderMenu from '../../components/HeaderMenu';
+import Card from '../../components/Card';
 
 import search from '../../assets/search.svg';
-import heartRed from '../../assets/heartRed.svg';
-import heartGrey from '../../assets/heartGrey.svg';
+// import heartRed from '../../assets/heartRed.svg';
+// import heartGrey from '../../assets/heartGrey.svg';
 
-import { Container, Content, ContentCards, InputSearch, Card } from './styles';
+import { Container, Content, ContentCards, InputSearch } from './styles';
 
 const Search: React.FC = () => {
-  const { buscar, pokemons, addfavorites } = useContext(PokemonContext);
+  const { buscar, pokemons } = useContext(PokemonContext);
 
   const [newPokemon, setNewPokemon] = useState('');
 
@@ -25,10 +26,6 @@ const Search: React.FC = () => {
     if (newPokemon) {
       buscar(newPokemon);
     }
-  }
-
-  function handleAddFavorites(item: Pokemon): void {
-    addfavorites(item);
   }
 
   return (
@@ -51,34 +48,7 @@ const Search: React.FC = () => {
 
           <ContentCards>
             {pokemons.map((item) => (
-              <Card key={item.id}>
-                <button
-                  onClick={() => {
-                    handleAddFavorites(item);
-                  }}
-                  type="button"
-                >
-                  {item.favorite === true ? (
-                    <img src={heartRed} alt="" />
-                  ) : (
-                    <img src={heartGrey} alt="" />
-                  )}
-                </button>
-
-                <img src={item.sprites.front_default} alt="" />
-
-                <div>
-                  <h1>{item.name}</h1>
-                  <span>ID: {item.id}</span>
-
-                  <div>
-                    {item.types.map((type) => (
-                      <div>{type.type.name}</div>
-                    ))}
-                  </div>
-                  <button type="button">Ver detalhes</button>
-                </div>
-              </Card>
+              <Card key={item.id} pokemon={item} />
             ))}
           </ContentCards>
         </Content>

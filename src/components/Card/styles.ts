@@ -18,8 +18,8 @@ export const Cardpokemon = styled.div`
   justify-content: center;
   align-items: center;
 
-  margin: 14px 14px;
-  right: 17px;
+  margin: 13px 13px;
+  right: 11px;
 
   button {
     background: transparent;

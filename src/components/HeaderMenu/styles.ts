@@ -17,7 +17,7 @@ export const HeaderContent = styled.div`
 
 export const Nav = styled.nav`
   padding-top: 15px;
-  max-width: 413px;
+  max-width: 320px;
 
   ul {
     display: flex;
