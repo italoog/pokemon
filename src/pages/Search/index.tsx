@@ -8,8 +8,6 @@ import HeaderMenu from '../../components/HeaderMenu';
 import Card from '../../components/Card';
 
 import search from '../../assets/search.svg';
-// import heartRed from '../../assets/heartRed.svg';
-// import heartGrey from '../../assets/heartGrey.svg';
 
 import { Container, Content, ContentCards, InputSearch } from './styles';
 

@@ -12,10 +12,13 @@ interface CardPropes {
 }
 
 const Card: React.FC<CardPropes> = ({ pokemon }) => {
-  const { addfavorites } = useContext(PokemonContext);
+  const { addfavorites, openModal } = useContext(PokemonContext);
 
   function handleAddFavorites(item: Pokemon): void {
     addfavorites(item);
+  }
+  function handleOpenModal(item: Pokemon): void {
+    openModal(item);
   }
 
   return (
@@ -45,7 +48,14 @@ const Card: React.FC<CardPropes> = ({ pokemon }) => {
               <div>{type.type.name}</div>
             ))}
           </div>
-          <button type="button">Ver detalhes</button>
+          <button
+            onClick={() => {
+              handleOpenModal(pokemon);
+            }}
+            type="button"
+          >
+            Ver detalhes
+          </button>
         </div>
       </Cardpokemon>
     </Container>

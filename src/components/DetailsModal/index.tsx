@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { Pokemon, PokemonContext } from '../../hooks/pokemonsContext';
 
 import {
   Overlay,
@@ -10,87 +12,104 @@ import {
   StatisticalBar,
 } from './stytles';
 import save from '../../assets/save.svg';
-import pokemoDetails from '../../assets/pokemoDetails.svg';
 import close from '../../assets/close.svg';
 
-const DetailsModal: React.FC = () => (
-  <Overlay>
-    <Container>
-      <Content>
-        <h1>Detalhes</h1>
-        <h2>Pikachu</h2>
-        <PokemonAvatar>
+interface CardPropes {
+  pokemon: Pokemon;
+}
+
+const DetailsModal: React.FC<CardPropes> = ({ pokemon }) => {
+  const { closeModal } = useContext(PokemonContext);
+
+  function handleCloseModal(): void {
+    closeModal();
+  }
+
+  return (
+    <Overlay>
+      <Container>
+        <Content>
+          <h1>Detalhes</h1>
+          <h2>{pokemon.name}</h2>
+          <PokemonAvatar>
+            <div>
+              <img src={pokemon.sprites.front_default} alt="" />
+            </div>
+            <div>
+              <img src={pokemon.sprites.back_default} alt="" />
+            </div>
+          </PokemonAvatar>
           <div>
-            <img src={pokemoDetails} alt="" />
+            <strong>{pokemon.height}m</strong>
+            <strong>{pokemon.weight}Kg</strong>
           </div>
-          <div>
-            <img src={pokemoDetails} alt="" />
-          </div>
-        </PokemonAvatar>
-        <div>
-          <strong>1.23m</strong>
-          <strong>54Kg</strong>
-        </div>
-        <Category>
-          <div>Elétrico</div>
-          <div>Fire</div>
-        </Category>
-        <Statistic>
-          <div>
-            <strong>Estatisticas</strong>
-          </div>
-          <StatisticalBar>
-            <span>HP</span>
+          <Category>
+            {pokemon.types.map((type) => (
+              <div>{type.type.name}</div>
+            ))}
+          </Category>
+          <Statistic>
             <div>
-              <div style={{ width: `80%` }} />
+              <strong>Estatisticas</strong>
             </div>
-            <span>93</span>
-          </StatisticalBar>
-          <StatisticalBar>
-            <span>ATK</span>
-            <div>
-              <div style={{ width: `50%` }} />
-            </div>
-            <span>93</span>
-          </StatisticalBar>
-          <StatisticalBar>
-            <span>DEF</span>
-            <div>
-              <div style={{ width: `59%` }} />
-            </div>
-            <span>93</span>
-          </StatisticalBar>
-          <StatisticalBar>
-            <span>S.ATK</span>
-            <div>
-              <div style={{ width: `30%` }} />
-            </div>
-            <span>93</span>
-          </StatisticalBar>
-          <StatisticalBar>
-            <span>S.DEF</span>
-            <div>
-              <div style={{ width: `50%` }} />
-            </div>
-            <span>93</span>
-          </StatisticalBar>
-          <StatisticalBar>
-            <span>SPD</span>
-            <div>
-              <div style={{ width: `70%` }} />
-            </div>
-            <span>93</span>
-          </StatisticalBar>
-        </Statistic>
-        <button type="button">
-          <img src={save} alt="" /> Adicionar aos favoritos
+            <StatisticalBar>
+              <span>HP</span>
+              <div>
+                <div style={{ width: `${pokemon.stats[0].base_stat}%` }} />
+              </div>
+              <span>{pokemon.stats[0].base_stat}</span>
+            </StatisticalBar>
+            <StatisticalBar>
+              <span>ATK</span>
+              <div>
+                <div style={{ width: `${pokemon.stats[1].base_stat}%` }} />
+              </div>
+              <span>{pokemon.stats[1].base_stat}</span>
+            </StatisticalBar>
+            <StatisticalBar>
+              <span>DEF</span>
+              <div>
+                <div style={{ width: `${pokemon.stats[2].base_stat}%` }} />
+              </div>
+              <span>{pokemon.stats[2].base_stat}</span>
+            </StatisticalBar>
+            <StatisticalBar>
+              <span>S.ATK</span>
+              <div>
+                <div style={{ width: `${pokemon.stats[3].base_stat}%` }} />
+              </div>
+              <span>{pokemon.stats[3].base_stat}</span>
+            </StatisticalBar>
+            <StatisticalBar>
+              <span>S.DEF</span>
+              <div>
+                <div style={{ width: `${pokemon.stats[4].base_stat}%` }} />
+              </div>
+              <span>{pokemon.stats[4].base_stat}</span>
+            </StatisticalBar>
+            <StatisticalBar>
+              <span>SPD</span>
+              <div>
+                <div style={{ width: `${pokemon.stats[5].base_stat}%` }} />
+              </div>
+              <span>{pokemon.stats[5].base_stat}</span>
+            </StatisticalBar>
+          </Statistic>
+          <button type="button">
+            <img src={save} alt="" /> Adicionar aos favoritos
+          </button>
+        </Content>
+        <button
+          onClick={() => {
+            handleCloseModal();
+          }}
+          type="button"
+        >
+          <img src={close} alt="" />
         </button>
-      </Content>
-      <button type="button">
-        <img src={close} alt="" />
-      </button>
-    </Container>
-  </Overlay>
-);
+      </Container>
+    </Overlay>
+  );
+};
 
 export default DetailsModal;

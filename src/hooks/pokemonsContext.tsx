@@ -4,6 +4,11 @@
 import React, { createContext, useCallback, useState } from 'react';
 import api from '../services/api';
 
+import DetailsModal from '../components/DetailsModal';
+
+interface PokemonStats {
+  base_stat: number;
+}
 interface PokemonType {
   slot: number;
   type: any;
@@ -15,7 +20,7 @@ export interface Pokemon {
   favorite: boolean;
   weight: number;
   height: number;
-  stats: [];
+  stats: PokemonStats[];
   types: PokemonType[];
   sprites: {
     back_default: string;
@@ -28,6 +33,10 @@ interface PokemonContextData {
   pokemons: Pokemon[];
   favorites: Pokemon[];
   addfavorites(item: Pokemon): void;
+  openModal(item: Pokemon): void;
+  pokemonModal: Pokemon;
+  modalIsOpen: boolean;
+  closeModal(): void;
 }
 
 export const PokemonContext = createContext<PokemonContextData>(
@@ -37,6 +46,8 @@ export const PokemonContext = createContext<PokemonContextData>(
 export const PokemonProvider: React.FC = ({ children }) => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [favorites, setFavorites] = useState<Pokemon[]>([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [pokemonModal, setPokemonModal] = useState<Pokemon>({} as Pokemon);
 
   const buscar = useCallback(
     async (inputText) => {
@@ -76,11 +87,30 @@ export const PokemonProvider: React.FC = ({ children }) => {
     [setFavorites, favorites],
   );
 
+  const openModal = useCallback((item: Pokemon) => {
+    setModalIsOpen(true);
+    setPokemonModal(item);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setModalIsOpen(false);
+  }, []);
+
   return (
     <PokemonContext.Provider
-      value={{ addfavorites, buscar, favorites, pokemons }}
+      value={{
+        addfavorites,
+        buscar,
+        favorites,
+        pokemons,
+        openModal,
+        pokemonModal,
+        modalIsOpen,
+        closeModal,
+      }}
     >
       {children}
+      {modalIsOpen && <DetailsModal pokemon={pokemonModal} />}
     </PokemonContext.Provider>
   );
 };

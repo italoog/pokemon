@@ -101,7 +101,6 @@ export const PokemonAvatar = styled.div`
 
     img {
       margin: 0 auto;
-      width: 44.53px;
     }
   }
 `;
@@ -183,5 +182,6 @@ export const StatisticalBar = styled.div`
     height: 9px;
     border-radius: 8px;
     background: #ffcb05;
+    max-width: 100%;
   }
 `;
