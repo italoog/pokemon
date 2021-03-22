@@ -28,15 +28,26 @@ export interface Pokemon {
   };
 }
 
+interface namePokemon {
+  name: string;
+  url: string;
+}
+
+interface ResponseAllPokemons {
+  results: namePokemon[];
+}
+
 interface PokemonContextData {
-  buscar(inputtext: string): Promise<void>;
+  search(inputtext: string): Promise<void>;
   pokemons: Pokemon[];
+  allPokemons: Pokemon[];
   favorites: Pokemon[];
   addfavorites(item: Pokemon): void;
   openModal(item: Pokemon): void;
   pokemonModal: Pokemon;
   modalIsOpen: boolean;
   closeModal(): void;
+  getAll(): void;
 }
 
 export const PokemonContext = createContext<PokemonContextData>(
@@ -45,11 +56,14 @@ export const PokemonContext = createContext<PokemonContextData>(
 
 export const PokemonProvider: React.FC = ({ children }) => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
   const [favorites, setFavorites] = useState<Pokemon[]>([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [pokemonModal, setPokemonModal] = useState<Pokemon>({} as Pokemon);
 
-  const buscar = useCallback(
+  // const [pokex, setPokex] = useState<any[]>([]);
+
+  const search = useCallback(
     async (inputText) => {
       const response = await api.get<Pokemon>(`pokemon/${inputText}`);
 
@@ -67,6 +81,24 @@ export const PokemonProvider: React.FC = ({ children }) => {
     },
     [setPokemons, pokemons],
   );
+
+  const getAll = useCallback(async () => {
+    const response = await api.get<ResponseAllPokemons>(
+      `pokemon?limit=20&offset=0`,
+    );
+
+    const pokemonPromises: any = [];
+    // eslint-disable-next-line no-plusplus
+    response.data.results.forEach(async (item) => {
+      const res = await api.get<Pokemon>(`pokemon/${item.name}`);
+      pokemonPromises.push(res.data);
+    });
+
+    setAllPokemons(pokemonPromises);
+    setPokemons(pokemonPromises);
+
+    // console.log(pokemonPromises);
+  }, []);
 
   const addfavorites = useCallback(
     (pokemon: Pokemon) => {
@@ -100,13 +132,15 @@ export const PokemonProvider: React.FC = ({ children }) => {
     <PokemonContext.Provider
       value={{
         addfavorites,
-        buscar,
+        search,
         favorites,
         pokemons,
+        allPokemons,
         openModal,
         pokemonModal,
         modalIsOpen,
         closeModal,
+        getAll,
       }}
     >
       {children}

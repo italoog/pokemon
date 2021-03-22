@@ -7,12 +7,12 @@ import ThemeButton from '../../components/ThemeButton';
 import HeaderMenu from '../../components/HeaderMenu';
 import Card from '../../components/Card';
 
-import search from '../../assets/search.svg';
+import searchIcon from '../../assets/search.svg';
 
 import { Container, Content, ContentCards, InputSearch } from './styles';
 
 const Search: React.FC = () => {
-  const { buscar, pokemons } = useContext(PokemonContext);
+  const { search, pokemons } = useContext(PokemonContext);
 
   const [newPokemon, setNewPokemon] = useState('');
 
@@ -22,7 +22,7 @@ const Search: React.FC = () => {
     event.preventDefault();
 
     if (newPokemon) {
-      buscar(newPokemon);
+      search(newPokemon);
     }
   }
 
@@ -39,7 +39,7 @@ const Search: React.FC = () => {
                 placeholder="Procure por pokémons"
               />
               <button type="submit">
-                <img src={search} alt="" />
+                <img src={searchIcon} alt="" />
               </button>
             </InputSearch>
           </form>

@@ -19,7 +19,11 @@ interface CardPropes {
 }
 
 const DetailsModal: React.FC<CardPropes> = ({ pokemon }) => {
-  const { closeModal } = useContext(PokemonContext);
+  const { closeModal, addfavorites } = useContext(PokemonContext);
+
+  function handleAddFavorites(item: Pokemon): void {
+    addfavorites(item);
+  }
 
   function handleCloseModal(): void {
     closeModal();
@@ -28,7 +32,7 @@ const DetailsModal: React.FC<CardPropes> = ({ pokemon }) => {
   return (
     <Overlay>
       <Container>
-        <Content>
+        <Content isFavorited={pokemon.favorite}>
           <h1>Detalhes</h1>
           <h2>{pokemon.name}</h2>
           <PokemonAvatar>
@@ -95,8 +99,19 @@ const DetailsModal: React.FC<CardPropes> = ({ pokemon }) => {
               <span>{pokemon.stats[5].base_stat}</span>
             </StatisticalBar>
           </Statistic>
-          <button type="button">
-            <img src={save} alt="" /> Adicionar aos favoritos
+          <button
+            onClick={() => {
+              handleAddFavorites(pokemon);
+            }}
+            type="button"
+          >
+            {pokemon.favorite === true ? (
+              <span>Remover dos favoritos</span>
+            ) : (
+              <span>
+                <img src={save} alt="" /> Adicionar aos favoritos
+              </span>
+            )}
           </button>
         </Content>
         <button

@@ -54,7 +54,7 @@ export const Nav = styled.nav`
           text-align: center;
 
           background: #343232;
-          border-radius: 8.5px;
+          border-radius: 50%;
         }
       }
     }

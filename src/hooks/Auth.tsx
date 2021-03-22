@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { createContext, useCallback, useContext, useState } from 'react';
 
-// interface AuthState {
-//   email: string;
-// }
-
 interface SignInCredentials {
   email: string;
   password: string;
@@ -37,7 +33,7 @@ const AuthProvider: React.FC = ({ children }) => {
   const logout = useCallback(() => {
     localStorage.removeItem('@Pokemon:email');
 
-    setData({});
+    setData(null);
   }, []);
 
   return (

@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+interface ModaProps {
+  isFavorited: boolean;
+}
 
 export const Overlay = styled.div`
   background: rgba(120, 120, 120, 0.5);
@@ -37,7 +41,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Content = styled.div`
+export const Content = styled.div<ModaProps>`
   max-width: 330px;
 
   h1 {
@@ -78,12 +82,21 @@ export const Content = styled.div`
     background: #ffcb05;
     border-radius: 8px;
     border: 0;
+    transition: background-color 0.2s;
 
-    img {
+    span img {
       position: relative;
       top: 4px;
+      left: 1px;
       margin-right: 6px;
     }
+
+    ${(props) =>
+      props.isFavorited === true &&
+      css`
+        background: #ff3326;
+        color: #ffffff;
+      `}
   }
 `;
 
