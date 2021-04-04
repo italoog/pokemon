@@ -44,6 +44,10 @@ export const Nav = styled.nav`
           font-weight: 600;
           border-bottom: 2px solid #000000;
         }
+        /* &:focus {
+          font-weight: 600;
+          border-bottom: 2px solid #000000;
+        } */
 
         > div {
           margin-left: 5px;

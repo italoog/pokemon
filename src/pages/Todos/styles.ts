@@ -16,14 +16,20 @@ export const Filtro = styled.div`
   button {
     width: 145px;
     height: 42px;
-    background: #ffcb05;
     border-radius: 8px;
-    border: 0;
+    border: 1px solid #6b6868;
+    background: transparent;
+    transition: background-color 0.2s;
 
     & + button {
       margin-left: 8px;
       border: 1px solid #6b6868;
       background: transparent;
+    }
+
+    & + :focus {
+      border: 0;
+      background: #ffcb05;
     }
   }
 `;

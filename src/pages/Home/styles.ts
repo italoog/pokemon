@@ -17,4 +17,6 @@ export const Bookmarks = styled.div`
 export const ContentCards = styled.section`
   display: flex;
   flex-direction: row;
+  max-width: 1164px;
+  flex-wrap: wrap;
 `;

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable camelcase */
-import React, { createContext, useCallback, useState } from 'react';
+import React, { createContext, useCallback, useEffect, useState } from 'react';
 import api from '../services/api';
 
 import DetailsModal from '../components/DetailsModal';
@@ -37,17 +37,23 @@ interface ResponseAllPokemons {
   results: namePokemon[];
 }
 
+interface ResponseFilterPokemons {
+  pokemon: any[];
+}
+
 interface PokemonContextData {
   search(inputtext: string): Promise<void>;
   pokemons: Pokemon[];
   allPokemons: Pokemon[];
   favorites: Pokemon[];
+  allPokemonsFiltered: Pokemon[];
   addfavorites(item: Pokemon): void;
   openModal(item: Pokemon): void;
   pokemonModal: Pokemon;
   modalIsOpen: boolean;
   closeModal(): void;
   getAll(): void;
+  filterPokemon(type: string): void;
 }
 
 export const PokemonContext = createContext<PokemonContextData>(
@@ -57,11 +63,11 @@ export const PokemonContext = createContext<PokemonContextData>(
 export const PokemonProvider: React.FC = ({ children }) => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [allPokemonsFiltered, setAllPokemonsFiltered] = useState<Pokemon[]>([]);
   const [favorites, setFavorites] = useState<Pokemon[]>([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [pokemonModal, setPokemonModal] = useState<Pokemon>({} as Pokemon);
-
-  // const [pokex, setPokex] = useState<any[]>([]);
 
   const search = useCallback(
     async (inputText) => {
@@ -84,20 +90,17 @@ export const PokemonProvider: React.FC = ({ children }) => {
 
   const getAll = useCallback(async () => {
     const response = await api.get<ResponseAllPokemons>(
-      `pokemon?limit=20&offset=0`,
+      `pokemon?limit=150&offset=0`,
     );
 
     const pokemonPromises: any = [];
-    // eslint-disable-next-line no-plusplus
+
     response.data.results.forEach(async (item) => {
       const res = await api.get<Pokemon>(`pokemon/${item.name}`);
-      pokemonPromises.push(res.data);
+      pokemonPromises[res.data.id] = res.data;
     });
 
     setAllPokemons(pokemonPromises);
-    setPokemons(pokemonPromises);
-
-    // console.log(pokemonPromises);
   }, []);
 
   const addfavorites = useCallback(
@@ -119,6 +122,20 @@ export const PokemonProvider: React.FC = ({ children }) => {
     [setFavorites, favorites],
   );
 
+  const filterPokemon = useCallback(async (type: string) => {
+    const response = await api.get<ResponseFilterPokemons>(`type/${type}`);
+
+    const pokemonPromises: any = [];
+
+    response.data.pokemon.forEach(async (item) => {
+      const res = await api.get<Pokemon>(`pokemon/${item.pokemon.name}`);
+      pokemonPromises[res.data.id] = res.data;
+      // console.log(item.pokemon.name);
+    });
+
+    setAllPokemonsFiltered(pokemonPromises);
+  }, []);
+
   const openModal = useCallback((item: Pokemon) => {
     setModalIsOpen(true);
     setPokemonModal(item);
@@ -127,6 +144,10 @@ export const PokemonProvider: React.FC = ({ children }) => {
   const closeModal = useCallback(() => {
     setModalIsOpen(false);
   }, []);
+
+  useEffect(() => {
+    getAll();
+  }, [getAll]);
 
   return (
     <PokemonContext.Provider
@@ -141,6 +162,8 @@ export const PokemonProvider: React.FC = ({ children }) => {
         modalIsOpen,
         closeModal,
         getAll,
+        filterPokemon,
+        allPokemonsFiltered,
       }}
     >
       {children}
