@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useContext, useState } from 'react';
 
 import ThemeButton from '../../components/ThemeButton';
@@ -8,7 +9,6 @@ import { Container, Content, ContentCards, Filtro } from './styles';
 import { PokemonContext } from '../../hooks/pokemonsContext';
 
 const Todos: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const {
     allPokemons,
     allPokemonsFiltered,
@@ -24,7 +24,7 @@ const Todos: React.FC = () => {
         <HeaderMenu />
         <Content>
           <Filtro>
-            <button
+            {/* <button
               onClick={() => {
                 getAll();
                 setfilterOnOff(false);
@@ -59,7 +59,7 @@ const Todos: React.FC = () => {
               type="button"
             >
               Water
-            </button>
+            </button> */}
           </Filtro>
           <ContentCards>
             {filterOnOff === false ? (

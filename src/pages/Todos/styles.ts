@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: #f5f7fa;
+  /* background: #f5f7fa; */
 `;
 
 export const Content = styled.div`
@@ -23,11 +23,9 @@ export const Filtro = styled.div`
 
     & + button {
       margin-left: 8px;
-      border: 1px solid #6b6868;
-      background: transparent;
     }
 
-    & + :focus {
+    :focus {
       border: 0;
       background: #ffcb05;
     }
