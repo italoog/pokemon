@@ -67,7 +67,7 @@ const Login: React.FC = () => {
           <Button type="submit">Entrar</Button>
         </Form>
 
-        <ThemeButton />
+        {/* <ThemeButton /> */}
       </Content>
       <Background />
     </Container>

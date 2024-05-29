@@ -51,7 +51,7 @@ const Search: React.FC = () => {
           </ContentCards>
         </Content>
 
-        <ThemeButton />
+        {/* <ThemeButton /> */}
       </Container>
     </>
   );

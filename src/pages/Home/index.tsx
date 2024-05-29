@@ -32,7 +32,7 @@ const Home: React.FC = () => {
           <EmptySpace />
         )}
 
-        <ThemeButton />
+        {/* <ThemeButton /> */}
       </Container>
     </>
   );

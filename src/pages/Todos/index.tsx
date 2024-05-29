@@ -77,7 +77,7 @@ const Todos: React.FC = () => {
             )}
           </ContentCards>
         </Content>
-        <ThemeButton />
+        {/* <ThemeButton /> */}
       </Container>
     </>
   );
